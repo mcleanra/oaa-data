@@ -1,6 +1,6 @@
 {
   "name": "oaa-data",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An angular 1 module that contains the services to interact with OAA data",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,5 +23,8 @@
   "unpkg": "dist/oaa-data.min.js",
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "angular-sp-digest": "^1.0.0"
+  }
 }
