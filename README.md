@@ -25,7 +25,7 @@ angular.module('myApp', ['oaa.data']);
 
 ### Bower
 
->Todo
+<pre>bower install oaa-data</pre>
 
 ## Contributing
 
