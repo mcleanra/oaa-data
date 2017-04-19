@@ -1,0 +1,17 @@
+{
+  "name": "oaa-data",
+  "description": "An angular 1 module that contains the services to interact with OAA data",
+  "main": "",
+  "authors": [
+    "Ryan McLean"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mcleanra/oaa-data",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

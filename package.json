@@ -1,0 +1,27 @@
+{
+  "name": "oaa-data",
+  "version": "1.0.0",
+  "description": "An angular 1 module that contains the services to interact with OAA data",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcleanra/oaa-data.git"
+  },
+  "author": "Ryan McLean",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcleanra/oaa-data/issues"
+  },
+  "homepage": "https://github.com/mcleanra/oaa-data#readme",
+  "devDependencies": {
+    "gulp": "~3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^2.1.2"
+  },
+  "unpkg": "dist/oaa-data.min.js",
+  "files": [
+    "dist"
+  ]
+}
