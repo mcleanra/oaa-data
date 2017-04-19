@@ -4,7 +4,7 @@
 
   var app = angular.module('oaa.data', [
 		'ryan.spList',
-    'ryan.requestDigest'
+    'angular.sp.digest'
 	])
   .config(function(){
     
