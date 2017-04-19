@@ -1,7 +1,12 @@
 {
   "name": "oaa-data",
   "description": "An angular 1 module that contains the services to interact with OAA data",
-  "main": "",
+  "main": [
+    "dist/oaa-data.js"
+  ],
+  "moduleType": [
+    "globals"
+  ],
   "authors": [
     "Ryan McLean"
   ],
