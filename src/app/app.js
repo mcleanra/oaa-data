@@ -3,7 +3,7 @@
     'use strict';
 
   var app = angular.module('oaa.data', [
-		'ryan.spList',
+		'angular.sp.list',
     'angular.sp.digest'
 	])
   .config(function(){
