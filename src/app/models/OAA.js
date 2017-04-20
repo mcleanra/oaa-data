@@ -22,6 +22,7 @@
                     <FieldRef Name='Concept_x002f_Comments' />\
                     <FieldRef Name='Event_x003a_Priority' />\
                     <FieldRef Name='Event_x003a_OAA_x0020_Type' />\
+                    <FieldRef Name='Status' />\
                 </ViewFields>";
 
             var _spServicesJsonMapping = {
@@ -37,7 +38,8 @@
                 ows_US_x0020_Pax: { mappedName: "US_x0020_Pax", objectType: "Number" },
                 ows_Concept_x002f_Comments: { mappedName: "Concept_x002f_Comments", objectType: "Text" },
                 ows_Event_x003a_Priority: { mappedName: "Event_x003a_Priority", objectType: "Text" },
-                ows_Event_x003a_OAA_x0020_Type: { mappedName: "Event_x003a_OAA_x0020_Type", objectType: "Text" }
+                ows_Event_x003a_OAA_x0020_Type: { mappedName: "Event_x003a_OAA_x0020_Type", objectType: "Text" },
+                ows_Status: { mappedName: "Status", objectType: "Text" }
 
             };
 
@@ -55,6 +57,7 @@
                 this.Concept_x002f_Comments = item.Concept_x002f_Comments;
                 this.Event_x003a_Priority = item.Event_x003a_Priority;
                 this.Event_x003a_OAA_x0020_Type = item.Event_x003a_OAA_x0020_Type;
+                this.Status = item.Status;
             };
 
             OAA.prototype = new spListItem(_siteUrl, _listName, _viewFields, _spServicesJsonMapping);
