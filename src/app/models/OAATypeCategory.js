@@ -5,7 +5,7 @@
     angular.module('oaa.data')
         .factory('OAATypeCategory', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "OAA Type Categories";
             var _viewFields =
                 "<ViewFields>\

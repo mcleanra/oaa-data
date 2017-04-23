@@ -5,7 +5,7 @@
     angular.module('oaa.data')
         .factory('Message', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "Messages";
             var _viewFields =
                 "<ViewFields>\
