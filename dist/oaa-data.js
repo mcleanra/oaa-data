@@ -10,14 +10,10 @@
     
     window._spFormDigestRefreshInterval = 1440000;
 
-    window._spPageContextInfo = window._spPageContextInfo || {
-      siteAbsoluteUrl: '/OAA'
-    };
-
   })
   .run(['RequestDigestIntervalService', function(RequestDigestIntervalService){
     //this refreshes the request digest every 24 minutes, allowing us to post info to SharePoint
-    RequestDigestIntervalService.startInterval();
+    RequestDigestIntervalService.startInterval('/OAA');
   }]);
 
   app.value('_', window._);
@@ -32,7 +28,7 @@
     angular.module('oaa.data')
         .factory('Country', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "Country";
             var _viewFields =
                 "<ViewFields>\
@@ -85,7 +81,7 @@
     angular.module('oaa.data')
         .factory('CountryContact', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "CountryContacts";
             var _viewFields =
                 "<ViewFields>\
@@ -150,7 +146,7 @@
     angular.module('oaa.data')
         .factory('CountryTeamEvent', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "CountryTeamEvents";
             var _viewFields =
                 "<ViewFields>\
@@ -212,7 +208,7 @@
     angular.module('oaa.data')
         .factory('Event', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "Event";
             var _viewFields =
                 "<ViewFields>\
@@ -331,7 +327,7 @@
     angular.module('oaa.data')
         .factory('Message', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "Messages";
             var _viewFields =
                 "<ViewFields>\
@@ -387,7 +383,7 @@
     angular.module('oaa.data')
         .factory('MissionProduct', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "Mission Products";
             var _viewFields =
                 "<ViewFields>\
@@ -474,7 +470,7 @@
     angular.module('oaa.data')
         .factory('OAA', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "OAA";
             var _viewFields =
                 "<ViewFields>\
@@ -491,6 +487,7 @@
                     <FieldRef Name='Concept_x002f_Comments' />\
                     <FieldRef Name='Event_x003a_Priority' />\
                     <FieldRef Name='Event_x003a_OAA_x0020_Type' />\
+                    <FieldRef Name='Status' />\
                 </ViewFields>";
 
             var _spServicesJsonMapping = {
@@ -506,7 +503,8 @@
                 ows_US_x0020_Pax: { mappedName: "US_x0020_Pax", objectType: "Number" },
                 ows_Concept_x002f_Comments: { mappedName: "Concept_x002f_Comments", objectType: "Text" },
                 ows_Event_x003a_Priority: { mappedName: "Event_x003a_Priority", objectType: "Text" },
-                ows_Event_x003a_OAA_x0020_Type: { mappedName: "Event_x003a_OAA_x0020_Type", objectType: "Text" }
+                ows_Event_x003a_OAA_x0020_Type: { mappedName: "Event_x003a_OAA_x0020_Type", objectType: "Text" },
+                ows_Status: { mappedName: "Status", objectType: "Text" }
 
             };
 
@@ -524,6 +522,7 @@
                 this.Concept_x002f_Comments = item.Concept_x002f_Comments;
                 this.Event_x003a_Priority = item.Event_x003a_Priority;
                 this.Event_x003a_OAA_x0020_Type = item.Event_x003a_OAA_x0020_Type;
+                this.Status = item.Status;
             };
 
             OAA.prototype = new spListItem(_siteUrl, _listName, _viewFields, _spServicesJsonMapping);
@@ -540,7 +539,7 @@
     angular.module('oaa.data')
         .factory('OAAType', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "OAA Types";
             var _viewFields =
                 "<ViewFields>\
@@ -587,7 +586,7 @@
     angular.module('oaa.data')
         .factory('OAATypeCategory', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "OAA Type Categories";
             var _viewFields =
                 "<ViewFields>\
@@ -625,7 +624,7 @@
     angular.module('oaa.data')
         .factory('Priority', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "Priorities";
             var _viewFields =
                 "<ViewFields>\
@@ -661,7 +660,7 @@
     angular.module('oaa.data')
         .factory('Staffing', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "Staffing";
             var _viewFields =
                 "<ViewFields>\
@@ -781,7 +780,7 @@
     angular.module('oaa.data')
         .factory('Unit', ['spListItem', function (spListItem) {
 
-            var _siteUrl = _spPageContextInfo.siteAbsoluteUrl;
+            var _siteUrl = "/OAA";
             var _listName = "Units";
             var _viewFields =
                 "<ViewFields>\

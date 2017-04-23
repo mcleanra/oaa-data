@@ -20,7 +20,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-sp-digest": "^1.0.0",
-    "angular-sp-list": "^1.0.0"
+    "angular-sp-list": "^2.0.0",
+    "angular-sp-digest": "^2.0.0"
   }
 }
