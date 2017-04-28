@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('oaa.data')
-        .factory('CountryTeamEvent', ['spListItem', function (spListItem) {
+        .factory('CountryTeamEvent', ['spListItem', 'moment', function (spListItem, moment) {
 
             var _siteUrl = "/OAA";
             var _listName = "CountryTeamEvents";

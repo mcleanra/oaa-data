@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('oaa.data')
-        .factory('OAA', ['spListItem', function (spListItem) {
+        .factory('OAA', ['spListItem', 'moment', function (spListItem, moment) {
 
             var _siteUrl = "/OAA";
             var _listName = "OAA";
