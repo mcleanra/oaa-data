@@ -20,7 +20,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-sp-list": "^3.0.0",
+    "angular-sp-list": "^3.0.2",
     "moment": "^2.18.1",
     "underscore": "^1.8.3"
   }
