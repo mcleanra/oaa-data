@@ -20,8 +20,11 @@
     "tests"
   ],
   "dependencies": {
-    "angular-sp-list": "^3.0.2",
     "moment": "^2.18.1",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "angular-sp-list": "^3.0.2"
+  },
+  "resolutions": {
+    "angular-sp-digest": "^3.0.2"
   }
 }
