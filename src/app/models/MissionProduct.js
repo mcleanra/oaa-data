@@ -84,9 +84,9 @@
 
             MissionProduct.prototype = new spListItem(_siteUrl, _listName, _viewFields, _spServicesJsonMapping);
 
-            //override this because the list name has a space in it
+            //special override for this because its different for document libraries
             MissionProduct.prototype.getListItemType = function(){
-                return "SP.Data.Mission_x0020_ProductsListItem";
+                return "SP.Data.Mission_x0020_ProductsItem";
             };
 
             return MissionProduct;
