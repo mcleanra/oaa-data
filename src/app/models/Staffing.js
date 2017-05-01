@@ -78,7 +78,7 @@
             };
 
             var Staffing = function (item) {
-                this.ID = item.ID;
+                this.Id = item.Id;
                 this.Title = item.Title;
                 this.Reviewer = item.Reviewer;
                 this.productname = item.productname;
