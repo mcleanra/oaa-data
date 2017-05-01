@@ -44,7 +44,7 @@
 				</ViewFields>";
 
             var _spServicesJsonMapping = {
-                ows_ID: { mappedName: "ID", objectType: "Number" },
+                ows_ID: { mappedName: "Id", objectType: "Number" },
                 ows_Title: { mappedName: "Title", objectType: "Text" },
                 ows_Reviewer: {mappedName: "Reviewer", objectType: "Choice"},
                 ows_productname: {mappedName: "productname", objectType: "Text"},

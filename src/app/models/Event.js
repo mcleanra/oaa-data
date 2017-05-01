@@ -80,7 +80,7 @@
                 ows_MovementDetails: {mappedName: "MovementDetails", objectType: "Text"},
 
                 //Fields common to all lists		
-                ows_ID: {mappedName: "ID", objectType: "Counter"},
+                ows_ID: {mappedName: "Id", objectType: "Counter"},
                 ows_Title: {mappedName: "Title", objectType: "Text"},
                 ows_Created: {mappedName: "Created", objectType: "DateTime"},
                 ows_Modified: {mappedName: "Modified", objectType: "DateTime"},
