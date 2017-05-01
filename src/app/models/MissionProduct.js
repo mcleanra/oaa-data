@@ -27,6 +27,8 @@
                     <FieldRef Name='Reporting_x0020_Date' />\
                     <FieldRef Name='Show_x0020_on_x0020_Country_x0020_Page' />\
                     <FieldRef Name='FileLeafRef' />\
+                    <FieldRef Name='KeyDocument' />\
+                    <FieldRef Name='SOFLE_x002f_SOLO_x002f_SOFREP' />\
                 </ViewFields>";
 
             var _spServicesJsonMapping = {
@@ -39,6 +41,7 @@
                 ows_Reporting_x0020_Date: {mappedName: "Reporting_x0020_Date", objectType: "DateTime"},
                 ows_Show_x0020_on_x0020_Country_x0020_Page: {mappedName: "Show_x0020_on_x0020_Country_x0020_Page", objectType: "Choice"},
                 ows_FileLeafRef: {mappedName: "FileLeafRef", objectType: "Text"},
+                ows_KeyDocument: {mappedName: "KeyDocument", objectType: "Boolean"},
 
                 //Fields common to all lists		
                 ows_ID: {mappedName: "ID", objectType: "Counter"},
@@ -51,7 +54,7 @@
                 ows_Caveats: {mappedName: "Caveats", objectType: "Text"},		
                 ows_ReleasabilityNotes: {mappedName: "ReleasabilityNotes", objectType: "Text"},		
                 ows_SpecialReleasability: {mappedName: "SpecialReleasability", objectType: "Text"},
-        
+                ows_SOFLE_x002f_SOLO_x002f_SOFREP: {mappedName: "SOFLE_x002f_SOLO_x002f_SOFREP", objectType: "Lookup"}
             };
 
             var MissionProduct = function (item) {
@@ -75,7 +78,8 @@
                 this.Caveats= 	 item.Caveats;
                 this.ReleasabilityNotes= item.ReleasabilityNotes;
                 this.SpecialReleasability=  item.SpecialReleasability;
-
+                this.KeyDocument = item.KeyDocument;
+                this.SOFLE_x002f_SOLO_x002f_SOFREP = item.SOFLE_x002f_SOLO_x002f_SOFREP;
             };
 
             MissionProduct.prototype = new spListItem(_siteUrl, _listName, _viewFields, _spServicesJsonMapping);
