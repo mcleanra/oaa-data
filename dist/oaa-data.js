@@ -711,7 +711,7 @@
                 ows_KeyDocument: {mappedName: "KeyDocument", objectType: "Boolean"},
 
                 //Fields common to all lists		
-                ows_ID: {mappedName: "Id", objectType: "Counter"},
+                ows_ID: {mappedName: "Id", objectType: "Number"},
                 ows_Title: {mappedName: "Title", objectType: "Text"},
                 ows_Created: {mappedName: "Created", objectType: "DateTime"},
                 ows_Modified: {mappedName: "Modified", objectType: "DateTime"},
@@ -735,16 +735,16 @@
                 this.FileLeafRef = item.FileLeafRef;
 
                 //Fields common to all lists		
-                this.ID=item.ID;
-                this.Title=item.Title;
-                this.Created=item.Created;
-                this.Modified= item.Modified;
-                this.Author=  item.Author;
-                this.Editor= item.Editor;
-                this.Classification=item.Classification;
-                this.Caveats= 	 item.Caveats;
-                this.ReleasabilityNotes= item.ReleasabilityNotes;
-                this.SpecialReleasability=  item.SpecialReleasability;
+                this.Id = item.Id;
+                this.Title = item.Title;
+                this.Created =item.Created;
+                this.Modified = item.Modified;
+                this.Author =  item.Author;
+                this.Editor = item.Editor;
+                this.Classification = item.Classification;
+                this.Caveats = 	 item.Caveats;
+                this.ReleasabilityNotes = item.ReleasabilityNotes;
+                this.SpecialReleasability =  item.SpecialReleasability;
                 this.KeyDocument = item.KeyDocument;
                 this.SOFLE_x002f_SOLO_x002f_SOFREP = item.SOFLE_x002f_SOLO_x002f_SOFREP;
             };
@@ -1026,7 +1026,7 @@
             };
 
             var Staffing = function (item) {
-                this.ID = item.ID;
+                this.Id = item.Id;
                 this.Title = item.Title;
                 this.Reviewer = item.Reviewer;
                 this.productname = item.productname;
