@@ -30,6 +30,7 @@
                     <FieldRef Name='Funds_x0020_Allocated' />\
                     <FieldRef Name='J8_x0020_Follow_x002d_Up' />\
                     <FieldRef Name='Travel_x0020_Cost' />\
+                    <FieldRef Name='Total_x0020_Cost' />\
                     <FieldRef Name='Movement_x0020_Type' />\
                     <FieldRef Name='Effect' />\
                     <FieldRef Name='Service_x0020_Identifier' />\
@@ -67,6 +68,7 @@
                 ows_Event_x0020_Cost: {mappedName: "Event_x0020_Cost", objectType: "Currency"},
                 ows_Funds_x0020_Allocated: {mappedName: "Funds_x0020_Allocated", objectType: "Currency"},
                 ows_Travel_x0020_Cost: {mappedName: "Travel_x0020_Cost", objectType: "Currency"},
+                ows_Total_x0020_Cost: {mappedName: "Total_x0020_Cost", objectType: "Currency"},
                 ows_US_x0020_Unit: {mappedName: "usUnows_US_x0020_Unitits", objectType: "MultiChoice"},
                 ows_Funds: {mappedName: "Funds", objectType: "MultiChoice"},
                 ows_Service_x0020_Identifier: {mappedName: "Service_x0020_Identifier", objectType: "MultiChoice"},
@@ -105,6 +107,8 @@
                 this.Type1 = item.Type1;
                 this.Priority = item.Priority;
                 this.Event_x0020_Cost = item.Event_x0020_Cost;
+                this.Travel_x0020_Cost = item.Travel_x0020_Cost;
+                this.Total_x0020_Cost = item.Total_x0020_Cost;
                 this.Funds = item.Funds;
                 this.Concept_x002f_Comments = item.Concept_x002f_Comments;
                 this.US_x0020_Unit = item.US_x0020_Unit;
