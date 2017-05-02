@@ -6,8 +6,8 @@
 
 		var svc = new spListService(Country);
 		
-		svc.getCountryItemsByRegion = function (region) {
-			return svc.get()
+		svc.getCountryItemsByRegion = function (region, options) {
+			return svc.get(options)
 				.then(function(countries){
 					if( region == 'SOCEUR' ) {
 						//return array of country names where Region is not blank

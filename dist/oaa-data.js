@@ -13,6 +13,306 @@
 
 (function (angular) {
 
+	'use strict';
+
+	angular.module('oaa.data').factory("countryContactsService", ['CountryContact', 'spListService',
+		function (CountryContact, spListService) {
+
+			var svc = new spListService(CountryContact);
+
+			return svc;
+
+		}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data').factory("countryService", ['Country', 'spListService', function (Country, spListService) {
+
+		var svc = new spListService(Country);
+		
+		svc.getCountryItemsByRegion = function (region, options) {
+			return svc.get(options)
+				.then(function(countries){
+					if( region == 'SOCEUR' ) {
+						//return array of country names where Region is not blank
+						countries = _.difference(countries, _.where(countries, {Region: ''}));
+					}
+					else {
+						//return array of country names where Region matches
+						countries = _.where(countries, {Region: region});
+					}
+					return countries;
+				});
+		};
+
+		return svc;
+
+	}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data')
+		.factory("countryTeamEventService", ['CountryTeamEvent', 'spListService', "_",
+			function (CountryTeamEvent, spListService, _) {
+
+				var svc = new spListService(CountryTeamEvent);
+
+				return svc;
+
+			}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data').factory("eventService", ['Event', 'spListService', '_', 'moment',
+		function (Event, spListService, _, moment) {
+
+			var svc = new spListService(Event);
+
+			//returns a rest $filter string given a start and end date
+			svc.getDateFilter = function (start, end) {
+				var start = moment(start).startOf('day').toISOString();
+				var end = moment(end).endOf('day').toISOString();
+
+				var filter = ''
+
+				//starts or ends in the search window
+				var dateFilter1 = "(((Start_x0020_Date ge datetime'" + start + "') and (Start_x0020_Date le datetime'" + end + "')) or \
+								((End_x0020_Date ge datetime'" + start + "') and (End_x0020_Date le datetime'" + end + "')))";
+
+				//starts before window and ends after window
+				var dateFilter2 = "((Start_x0020_Date le datetime'" + start + "') and (End_x0020_Date ge datetime'" + end + "'))";
+				filter = "(" + dateFilter1 + " or " + dateFilter2 + ")";
+
+				return filter;
+			};
+
+			//returns a rest $filter string given an array of countries
+			svc.getCountryFilter = function (countries, operator) {
+				var filters = [];
+				var operator = operator || 'or';
+
+				if (countries.length > 0) {
+					_.each(countries, function (country) {
+						filters.push("substringof('" + country + "',Primary_x0020_Country_x003a_Titl)");
+					});
+				}
+
+				return "(" + filters.join(' ' + operator + ' ') + ")";
+			};
+
+			svc.getCurrentEventsForCountry = function (country, options) {
+				var filters = [];
+
+				filters.push("Status eq 'Approved'");
+				filters.push(svc.getDateFilter(moment(), moment()));
+				filters.push(svc.getCountryFilter([country], 'or'));
+
+				var filter = filters.join(' and ');
+
+				return svc.getByFilters(filter, options);
+			}
+
+			return svc;
+
+		}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data')
+		.factory("messageService", ['Message', 'spListService', function (Message, spListService) {
+
+		var svc = new spListService(Message);
+
+		svc.getByArrayOfRelatedItemIDs = function(idArray){
+			var valueArray = [];
+			
+			_.each(idArray, function(id){
+				valueArray.push("<Value Type='Text'>" + id + "</Value>")
+			});
+			
+			var query = "<Query><Where><In><FieldRef Name='RelatedItemID'/><Values>" + valueArray.join('') + "</Values></In></Where></Query>";
+			return svc.executeCamlQuery(query);
+		};
+
+		return svc;
+
+	}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data').factory("missionProductsService", ['MissionProduct', 'spListService', function (MissionProduct, spListService) {
+
+		var svc = new spListService(MissionProduct);
+
+		return svc;
+
+	}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data').factory("oaaService", ['OAA', 'spListService', '_', 'moment',
+		function (OAA, spListService, _, moment) {
+
+			var svc = new spListService(OAA);
+
+			//returns a rest $filter string given a start and end date
+			svc.getDateFilter = function (start, end) {
+				var start = moment(start).startOf('day').toISOString();
+				var end = moment(end).endOf('day').toISOString();
+
+				var filter = ''
+
+				//starts or ends in the search window
+				var dateFilter1 = "(((Start_x0020_Date ge datetime'" + start + "') and (Start_x0020_Date le datetime'" + end + "')) or \
+								((End_x0020_Date ge datetime'" + start + "') and (End_x0020_Date le datetime'" + end + "')))";
+
+				//starts before window and ends after window
+				var dateFilter2 = "((Start_x0020_Date le datetime'" + start + "') and (End_x0020_Date ge datetime'" + end + "'))";
+				filter = "(" + dateFilter1 + " or " + dateFilter2 + ")";
+
+				return filter;
+			};
+
+			//returns a rest $filter string given an array of countries
+			svc.getCountryFilter = function (countries, operator) {
+				var filters = [];
+				var operator = operator || 'or';
+
+				if (countries.length > 0) {
+					_.each(countries, function (country) {
+						filters.push("substringof('" + country + "',Countries)");
+					});
+				}
+
+				return "(" + filters.join(' ' + operator + ' ') + ")";
+			};
+
+			svc.getCurrentOaasForCountry = function (country, options) {
+				var filters = [];
+
+				filters.push("Status eq 'Approved'");
+				filters.push(svc.getDateFilter(moment(), moment()));
+				filters.push(svc.getCountryFilter([country], 'or'));
+
+				var filter = filters.join(' and ');
+				return svc.getByFilters(filter, options);
+			}
+
+			return svc;
+
+		}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data').factory("oaaTypeCategoryService", ['OAATypeCategory', 'spListService', "_", function (OAATypeCategory, spListService, _) {
+
+		var svc = new spListService(OAATypeCategory);
+
+		return svc;
+
+	}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data').factory("oaaTypesService", ['OAAType', 'spListService', "_", function (OAAType, spListService, _) {
+
+		var svc = new spListService(OAAType);
+
+		return svc;
+
+	}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data').factory("prioritiesService", ['Priority', 'spListService', function (Priority, spListService) {
+
+		var svc = new spListService(Priority);
+
+		return svc;
+
+	}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data')
+		.factory("staffingService", ['Staffing', 'spListService', function (Staffing, spListService) {
+
+		var svc = new spListService(Staffing);
+
+		//returns a rest $filter string given an array of countries
+		svc.getCountryFilter = function(countries, operator){
+			var filters = [];
+			var operator = operator || 'or';
+
+			if( countries.length > 0 ) {
+				_.each(countries, function(country){
+					filters.push("substringof('" + country + "',countries)");
+				});
+			}
+
+			return "(" + filters.join(' ' + operator + ' ') + ")";
+		};
+
+		svc.getCurrentStaffingItemsForCountry = function(country, options) {
+			var filters = [];
+
+			filters.push("Status eq 'Staffing'");
+			filters.push(svc.getCountryFilter([country], 'or'));
+
+			var filter = filters.join(' and ');
+			return svc.getByFilters(filter, options);
+		};
+
+		return svc;
+
+	}]);
+
+})(angular);
+(function (angular) {
+
+	'use strict';
+
+	angular.module('oaa.data').factory("unitService", ['Unit', 'spListService', function (Unit, spListService) {
+
+		var svc = new spListService(Unit);
+
+		return svc;
+
+	}]);
+
+})(angular);
+(function (angular) {
+
     'use strict';
 
     angular.module('oaa.data')
@@ -808,304 +1108,5 @@
             return Unit;
 
         }]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data').factory("countryContactsService", ['CountryContact', 'spListService',
-		function (CountryContact, spListService) {
-
-			var svc = new spListService(CountryContact);
-
-			return svc;
-
-		}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data').factory("countryService", ['Country', 'spListService', function (Country, spListService) {
-
-		var svc = new spListService(Country);
-		
-		svc.getCountryItemsByRegion = function (region) {
-			return svc.get()
-				.then(function(countries){
-					if( region == 'SOCEUR' ) {
-						//return array of country names where Region is not blank
-						countries = _.difference(countries, _.where(countries, {Region: ''}));
-					}
-					else {
-						//return array of country names where Region matches
-						countries = _.where(countries, {Region: region});
-					}
-					return countries;
-				});
-		};
-
-		return svc;
-
-	}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data')
-		.factory("countryTeamEventService", ['CountryTeamEvent', 'spListService', "_",
-			function (CountryTeamEvent, spListService, _) {
-
-				var svc = new spListService(CountryTeamEvent);
-
-				return svc;
-
-			}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data').factory("eventService", ['Event', 'spListService', '_', 'moment',
-		function (Event, spListService, _, moment) {
-
-			var svc = new spListService(Event);
-
-			//returns a rest $filter string given a start and end date
-			svc.getDateFilter = function (start, end) {
-				var start = moment(start).startOf('day').toISOString();
-				var end = moment(end).endOf('day').toISOString();
-
-				var filter = ''
-
-				//starts or ends in the search window
-				var dateFilter1 = "(((Start_x0020_Date ge datetime'" + start + "') and (Start_x0020_Date le datetime'" + end + "')) or \
-								((End_x0020_Date ge datetime'" + start + "') and (End_x0020_Date le datetime'" + end + "')))";
-
-				//starts before window and ends after window
-				var dateFilter2 = "((Start_x0020_Date le datetime'" + start + "') and (End_x0020_Date ge datetime'" + end + "'))";
-				filter = "(" + dateFilter1 + " or " + dateFilter2 + ")";
-
-				return filter;
-			};
-
-			//returns a rest $filter string given an array of countries
-			svc.getCountryFilter = function (countries, operator) {
-				var filters = [];
-				var operator = operator || 'or';
-
-				if (countries.length > 0) {
-					_.each(countries, function (country) {
-						filters.push("substringof('" + country + "',Primary_x0020_Country_x003a_Titl)");
-					});
-				}
-
-				return "(" + filters.join(' ' + operator + ' ') + ")";
-			};
-
-			svc.getCurrentEventsForCountry = function (country) {
-				var filters = [];
-
-				filters.push("Status eq 'Approved'");
-				filters.push(svc.getDateFilter(moment(), moment()));
-				filters.push(svc.getCountryFilter([country], 'or'));
-
-				var filter = filters.join(' and ');
-				return svc.getByFilters(filter);
-			}
-
-			return svc;
-
-		}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data')
-		.factory("messageService", ['Message', 'spListService', function (Message, spListService) {
-
-		var svc = new spListService(Message);
-
-		svc.getByArrayOfRelatedItemIDs = function(idArray){
-			var valueArray = [];
-			
-			_.each(idArray, function(id){
-				valueArray.push("<Value Type='Text'>" + id + "</Value>")
-			});
-			
-			var query = "<Query><Where><In><FieldRef Name='RelatedItemID'/><Values>" + valueArray.join('') + "</Values></In></Where></Query>";
-			return svc.executeCamlQuery(query);
-		};
-
-		return svc;
-
-	}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data').factory("missionProductsService", ['MissionProduct', 'spListService', function (MissionProduct, spListService) {
-
-		var svc = new spListService(MissionProduct);
-
-		return svc;
-
-	}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data').factory("oaaService", ['OAA', 'spListService', '_', 'moment',
-		function (OAA, spListService, _, moment) {
-
-			var svc = new spListService(OAA);
-
-			//returns a rest $filter string given a start and end date
-			svc.getDateFilter = function (start, end) {
-				var start = moment(start).startOf('day').toISOString();
-				var end = moment(end).endOf('day').toISOString();
-
-				var filter = ''
-
-				//starts or ends in the search window
-				var dateFilter1 = "(((Start_x0020_Date ge datetime'" + start + "') and (Start_x0020_Date le datetime'" + end + "')) or \
-								((End_x0020_Date ge datetime'" + start + "') and (End_x0020_Date le datetime'" + end + "')))";
-
-				//starts before window and ends after window
-				var dateFilter2 = "((Start_x0020_Date le datetime'" + start + "') and (End_x0020_Date ge datetime'" + end + "'))";
-				filter = "(" + dateFilter1 + " or " + dateFilter2 + ")";
-
-				return filter;
-			};
-
-			//returns a rest $filter string given an array of countries
-			svc.getCountryFilter = function (countries, operator) {
-				var filters = [];
-				var operator = operator || 'or';
-
-				if (countries.length > 0) {
-					_.each(countries, function (country) {
-						filters.push("substringof('" + country + "',Countries)");
-					});
-				}
-
-				return "(" + filters.join(' ' + operator + ' ') + ")";
-			};
-
-			svc.getCurrentOaasForCountry = function (country, select) {
-				var filters = [];
-
-				filters.push("Status eq 'Approved'");
-				filters.push(svc.getDateFilter(moment(), moment()));
-				filters.push(svc.getCountryFilter([country], 'or'));
-
-				var filter = filters.join(' and ');
-				return svc.getByFilters(filter, select);
-			}
-
-			return svc;
-
-		}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data').factory("oaaTypeCategoryService", ['OAATypeCategory', 'spListService', "_", function (OAATypeCategory, spListService, _) {
-
-		var svc = new spListService(OAATypeCategory);
-
-		return svc;
-
-	}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data').factory("oaaTypesService", ['OAAType', 'spListService', "_", function (OAAType, spListService, _) {
-
-		var svc = new spListService(OAAType);
-
-		return svc;
-
-	}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data').factory("prioritiesService", ['Priority', 'spListService', function (Priority, spListService) {
-
-		var svc = new spListService(Priority);
-
-		return svc;
-
-	}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data')
-		.factory("staffingService", ['Staffing', 'spListService', function (Staffing, spListService) {
-
-		var svc = new spListService(Staffing);
-
-		//returns a rest $filter string given an array of countries
-		svc.getCountryFilter = function(countries, operator){
-			var filters = [];
-			var operator = operator || 'or';
-
-			if( countries.length > 0 ) {
-				_.each(countries, function(country){
-					filters.push("substringof('" + country + "',countries)");
-				});
-			}
-
-			return "(" + filters.join(' ' + operator + ' ') + ")";
-		};
-
-		svc.getCurrentStaffingItemsForCountry = function(country, select) {
-			var filters = [];
-
-			filters.push("Status eq 'Staffing'");
-			filters.push(svc.getCountryFilter([country], 'or'));
-
-			var filter = filters.join(' and ');
-			return svc.getByFilters(filter, select);
-		};
-
-		return svc;
-
-	}]);
-
-})(angular);
-(function (angular) {
-
-	'use strict';
-
-	angular.module('oaa.data').factory("unitService", ['Unit', 'spListService', function (Unit, spListService) {
-
-		var svc = new spListService(Unit);
-
-		return svc;
-
-	}]);
 
 })(angular);

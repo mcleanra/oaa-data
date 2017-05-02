@@ -39,7 +39,7 @@
 				return "(" + filters.join(' ' + operator + ' ') + ")";
 			};
 
-			svc.getCurrentOaasForCountry = function (country, select) {
+			svc.getCurrentOaasForCountry = function (country, options) {
 				var filters = [];
 
 				filters.push("Status eq 'Approved'");
@@ -47,7 +47,7 @@
 				filters.push(svc.getCountryFilter([country], 'or'));
 
 				var filter = filters.join(' and ');
-				return svc.getByFilters(filter, select);
+				return svc.getByFilters(filter, options);
 			}
 
 			return svc;
