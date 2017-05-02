@@ -484,7 +484,7 @@
                     <FieldRef Name='EventID' />\
                     <FieldRef Name='Start_x0020_Date' />\
                     <FieldRef Name='End_x0020_Date' />\
-                    <FieldRef Name='Event_x0020_IDId' />\
+                    <FieldRef Name='Event_x0020_ID' />\
                     <FieldRef Name='US_x0020_Unit' />\
                     <FieldRef Name='US_x0020_Pax' />\
                     <FieldRef Name='Concept_x002f_Comments' />\
@@ -501,7 +501,7 @@
                 ows_EventID: { mappedName: "EventID", objectType: "Text" },
                 ows_Start_x0020_Date: { mappedName: "Start_x0020_Date", objectType: "DateTime" },
                 ows_End_x0020_Date: { mappedName: "End_x0020_Date", objectType: "DateTime" },
-                ows_Event_x0020_IDId: { mappedName: "Event_x0020_IDId", objectType: "Lookup" },
+                ows_Event_x0020_ID: { mappedName: "Event_x0020_ID", objectType: "Lookup" },
                 ows_US_x0020_Unit: { mappedName: "US_x0020_Unit", objectType: "MultiChoice" },
                 ows_US_x0020_Pax: { mappedName: "US_x0020_Pax", objectType: "Number" },
                 ows_Concept_x002f_Comments: { mappedName: "Concept_x002f_Comments", objectType: "Text" },
@@ -519,7 +519,7 @@
                 this.EventID = item.EventID;
                 this.Start_x0020_Date = moment(item.Start_x0020_Date).toISOString();
                 this.End_x0020_Date = moment(item.End_x0020_Date).toISOString();
-                this.Event_x0020_IDId = item.Event_x0020_IDId;
+                this.Event_x0020_ID = item.Event_x0020_ID;
                 this.US_x0020_Unit = item.US_x0020_Unit;
                 this.US_x0020_Pax = item.US_x0020_Pax;
                 this.Concept_x002f_Comments = item.Concept_x002f_Comments;
