@@ -22,9 +22,9 @@
   "dependencies": {
     "moment": "^2.18.1",
     "underscore": "^1.8.3",
-    "angular-sp-list": "3.0.3"
+    "angular-sp-list": "3.0.4"
   },
   "resolutions": {
-
+    "angular-sp-list": "3.0.4"
   }
 }
