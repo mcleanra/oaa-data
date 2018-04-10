@@ -29,6 +29,7 @@
                     <FieldRef Name='FileLeafRef' />\
                     <FieldRef Name='KeyDocument' />\
                     <FieldRef Name='SOFLE_x002f_SOLO_x002f_SOFREP' />\
+                    <FieldRef Name='GeoTags' />\
                 </ViewFields>";
 
             var _spServicesJsonMapping = {
@@ -54,7 +55,8 @@
                 ows_Caveats: {mappedName: "Caveats", objectType: "Text"},		
                 ows_ReleasabilityNotes: {mappedName: "ReleasabilityNotes", objectType: "Text"},		
                 ows_SpecialReleasability: {mappedName: "SpecialReleasability", objectType: "Text"},
-                ows_SOFLE_x002f_SOLO_x002f_SOFREP: {mappedName: "SOFLE_x002f_SOLO_x002f_SOFREP", objectType: "Lookup"}
+                ows_SOFLE_x002f_SOLO_x002f_SOFREP: {mappedName: "SOFLE_x002f_SOLO_x002f_SOFREP", objectType: "Lookup"},
+                ows_GeoTags: {mappedName: "GeoTags", objectType: "Text"}
             };
 
             var MissionProduct = function (item) {
@@ -80,6 +82,12 @@
                 this.SpecialReleasability =  item.SpecialReleasability;
                 this.KeyDocument = item.KeyDocument;
                 this.SOFLE_x002f_SOLO_x002f_SOFREP = item.SOFLE_x002f_SOLO_x002f_SOFREP;
+                if( angular.isObject(item.GeoTags) ) {
+                    this.GeoTags = JSON.stringify(item.GeoTags);
+                }
+                else {
+                    this.GeoTags = JSON.parse(item.GeoTags);
+                }
             };
 
             MissionProduct.prototype = new spListItem(_siteUrl, _listName, _viewFields, _spServicesJsonMapping);
