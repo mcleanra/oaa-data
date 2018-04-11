@@ -86,7 +86,7 @@
                     this.GeoTags = JSON.stringify(item.GeoTags);
                 }
                 else {
-                    this.GeoTags = JSON.parse(item.GeoTags);
+                    this.GeoTags = this.GeoTags ? JSON.parse(item.GeoTags) : {};
                 }
             };
 
