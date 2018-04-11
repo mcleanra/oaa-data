@@ -82,12 +82,7 @@
                 this.SpecialReleasability =  item.SpecialReleasability;
                 this.KeyDocument = item.KeyDocument;
                 this.SOFLE_x002f_SOLO_x002f_SOFREP = item.SOFLE_x002f_SOLO_x002f_SOFREP;
-                if( angular.isObject(item.GeoTags) ) {
-                    this.GeoTags = JSON.stringify(item.GeoTags);
-                }
-                else {
-                    this.GeoTags = this.GeoTags ? JSON.parse(item.GeoTags) : {};
-                }
+                this.GeoTags = item.GeoTags;
             };
 
             MissionProduct.prototype = new spListItem(_siteUrl, _listName, _viewFields, _spServicesJsonMapping);
